@@ -60,7 +60,7 @@ begin
     ShowMessage(Ed_AppPort.Text);
 end;
 
-function TFrmHome.CheckEmptyEdit: Boolean;
+function TFrmHome.CheckEmptyEdit: Boolean; //FUN√á√ÉO PARA VERIFICAR CAMPOS VAZIOS  
 begin
   if (Trim(Ed_AppPort.Text) = '') or (Trim(Ed_Cliente.Text) = '') or (Trim(Ed_CNPJ.Text) = '') or
     (Trim(Ed_DSPort.Text) = '') or (Trim(Ed_DSPortHttp.Text) = '') or (Trim(Ed_MMPath.Text) = '') or
@@ -84,12 +84,12 @@ procedure TFrmHome.Panel1Click(Sender: TObject);
 begin
   if CheckEmptyEdit then
   begin
-    ShowMessage('H· campos vazios!' + #13 + 'Preencha todos os campos para prosseguir!');
+    ShowMessage('H√° campos vazios!' + #13 + 'Preencha todos os campos para prosseguir!');
   end
   else
   begin
     ShowMessage(
-    'AplicaÁ„o:' + #13 + 'Porta: ' + Trim(Ed_AppPort.Text) + #13 +
+    'Aplica√ß√£o:' + #13 + 'Porta: ' + Trim(Ed_AppPort.Text) + #13 +           //MOSTRA DADOS PREENCHIDOS PELO USUARIO
     'Cliente:' + #13 + 'Nome: ' + Trim(Ed_Cliente.Text) + #13 +
     'CNPJ: ' + Trim(Ed_CNPJ.Text) + #13 +
     'DataSnap:' + #13 + 'Porta: ' + Trim(Ed_DSPort.Text) + #13 +
