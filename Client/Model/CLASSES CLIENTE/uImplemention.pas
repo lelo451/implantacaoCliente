@@ -3,7 +3,7 @@ unit uImplemention;
 interface
 
 uses
-  uDM,uINI,System.SysUtils, Vcl.Forms;
+  uDM, uINI, System.SysUtils, Vcl.Forms, Vcl.Dialogs;
 
 type
 
@@ -12,47 +12,38 @@ TImplementar = class
 private
     fNomeEmpresa           : String;
     fCNPJ                  : String;
-    fDataImplementacao     : String;
-    fSuporte               : String;
-    fDataBase              : String;
     fPortaAplicacao        : String;
     fPortaSnap             : String;
     fPortaHTTP             : String;
-    fMormot                : String;
     class var fCNPJAceito  : TImplementar ;
 
 protected
 
 public
-  constructor Create;
-  procedure EnviarBanco;
   function AdcionarInformacao (aIP, aPortaServidor, aCaminho, aPortaAplicao, aPortaSnap, aPortaHTTP, aIP2,
                                aPortaServidor2, aCaminho2 : String): Boolean;
   function AdcionarCliente(aNome, aCNPJ : String) : Boolean;
-  function ChamarIni : String;
+  function ChamarIni(Sessao, Campo : String) : String;
   class function GetCNPJAceito : TImplementar;
 
 published
   property NomeEmpresa       : String  read fNomeEmpresa       write fNomeEmpresa;
   property CNPJ              : String  read fCNPJ              write fCNPJ;
-  property DataImplementacao : String  read fDataImplementacao write fDataImplementacao;
-  property Suporte           : String  read fSuporte           write fSuporte;
-  property DataBase          : String  read fDataBase          write fDataBase;
   property PortaAplicacao    : String  read fPortaAplicacao    write fPortaAplicacao;
   property PortaSnap         : String  read fPortaSnap         write fPortaSnap;
   property PortaHTTP         : String  read fPortaHTTP         write fPortaHTTP;
-  property Mormot            : String  read fMormot            write fMormot;
 end;
 
 implementation
 
-
+//Grava o nome do cliente
 function TImplementar.AdcionarCliente(aNome, aCNPJ: String): Boolean;
 begin
-  NomeEmpresa    := aNome;
-  CNPJ           := aCNPJ;
+  fNomeEmpresa    := aNome;
+  fCNPJ           := aCNPJ;
 end;
 
+//Salva no arquivo INI as informações passada
 function TImplementar.AdcionarInformacao(aIP, aPortaServidor, aCaminho, aPortaAplicao, aPortaSnap,
          aPortaHTTP, aIP2, aPortaServidor2, aCaminho2 : String): Boolean;
 var
@@ -60,60 +51,40 @@ var
   Mormot   : String;
   Ini      : TINI;
 begin
-//ESTA FALTANDO
-// TRY
-//  TRY
-//  .
-//  .
-//  EXCEPT
-//  END;
-//  .
-//  .
-// FINALLY
-// END;
-  DataBase       := aIp + '/' + aPortaServidor + ':' + aCaminho + '/' + CNPJ + '.FDB';
-  PortaAplicacao := aPortaAplicao;
-  PortaSnap      := aPortaSnap;
-  PortaHTTP      := aPortaHTTP;
-  Mormot         := aIp2 + '/' + aPortaServidor2 + ':' + aCaminho2 + '/' + CNPJ + '_LOG.FDB';
-
-  {FALTA INSTANCIA DA CLASSE (CREATE E DESTOROY)
-   FALTOU COMENTARIO PARA MELHOR ENTENDIMENTO DO CODIGO
-   OQ A CLASSE 'ADICIONARINFORMAÇÃO' FAZ?
-   O INI ESTÁ EXECUTANDO NILL (VAZIO)
-   ESTÁ FALTANDO INPLEMENTAR TRATAMENTO DE ERROS CONFORME MOSTRADO ACIMA
-  }
-
-  INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','FBCONNECTION',DataBase      ,'');
-  INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,PortaSnap     ,'');
-  INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,PortaHTTP     ,'');
-  INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,PortaAplicacao,'');
-  INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,Mormot        ,'');
-  result := true;
-
+  try
+    Ini := TINI.Create;
+    DataBase        := aIp + '/' + aPortaServidor + ':' + aCaminho + '/' + CNPJ + '.FDB';
+    FPortaAplicacao := aPortaAplicao;
+    FPortaSnap      := aPortaSnap;
+    FPortaHTTP      := aPortaHTTP;
+    Mormot          := aIp2 + '/' + aPortaServidor2 + ':' + aCaminho2 + '/' + CNPJ + '_LOG.FDB';
+    try
+      INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','FBCONNECTION','Database',DataBase);
+      INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,'Port'    ,PortaSnap);
+      INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,'PortHttp',PortaHTTP);
+      INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,'PORTA'   ,PortaAplicacao);
+      INI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,'Database',Mormot);
+      result := true;
+    except
+      result := false;
+    end;
+  finally
+    Ini.Free;
+  end;
 end;
-
-function TImplementar.ChamarIni: String;
+//tentando mostrar na tela
+function TImplementar.ChamarIni(Sessao, Campo : String): String;
 var
   Ini : TINI;
 begin
-  INI.LerINI(ExtractFilePath(Application.ExeName)+'Teste.ini','FBCONNECTION','Database','');
-  INI.LerINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,'Port'    ,'');
-  INI.LerINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,'PortHttp','');
-  INI.LerINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,'PORTA'   ,'');
-  INI.LerINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,'Database','');
+  Ini := TINI.Create;
+  try
+    result := INI.LerINI(ExtractFilePath(Application.ExeName)+'Teste.ini',Sessao,Campo,'');
+  finally
+    Ini.Free;
+  end;
 end;
-
-constructor TImplementar.Create;
-begin
-  inherited Create;
-end;
-
-procedure TImplementar.EnviarBanco;
-begin
-
-end;
-
+//Cria a unit
 class function TImplementar.GetCNPJAceito: TImplementar;
 begin
   if not Assigned(fCNPJAceito) then

@@ -4,12 +4,13 @@ object DataModule1: TDataModule1
   Width = 714
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\dev01.VIPSISTEMAS\Desktop\HACK\IMPLANTACAO.FDB'
+      
+        'Database=C:\Users\Archer\Documents\Embarcadero\Studio\Projects\I' +
+        'mplantacao\Client\IMPLANTACAO.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'Server=127.0.0.1'
       'DriverID=FB')
-    Connected = True
     LoginPrompt = False
     Left = 80
     Top = 56
