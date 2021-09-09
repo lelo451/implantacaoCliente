@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions/>
+  <Transactions>
+    <Transaction>2021/09/09 09:04:05.727,C:\Users\Archer\Documents\Embarcadero\Studio\Projects\Implantacao\Impantacao.groupproj=C:\Users\Archer\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj</Transaction>
+  </Transactions>
   <Default.Personality>
-    <Projects ActiveProject="C:\Users\Archer\Documents\Git clone\Implanta\Server\Server.dproj"/>
+    <Projects ActiveProject="C:\Users\Archer\Documents\Embarcadero\Studio\Projects\Implantacao\Server\Server.dproj"/>
   </Default.Personality>
 </BorlandProject>

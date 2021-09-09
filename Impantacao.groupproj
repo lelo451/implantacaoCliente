@@ -3,10 +3,10 @@
         <ProjectGuid>{709E9793-BAD2-4406-8E0E-6F9A0F59886D}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="..\..\..\..\Git clone\Implanta\HACK\HackAtum.dproj">
+        <Projects Include="Client\HackAtum.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\..\..\Git clone\Implanta\Server\Server.dproj">
+        <Projects Include="Server\Server.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -18,22 +18,22 @@
         </BorlandProject>
     </ProjectExtensions>
     <Target Name="HackAtum">
-        <MSBuild Projects="..\..\..\..\Git clone\Implanta\HACK\HackAtum.dproj"/>
+        <MSBuild Projects="Client\HackAtum.dproj"/>
     </Target>
     <Target Name="HackAtum:Clean">
-        <MSBuild Projects="..\..\..\..\Git clone\Implanta\HACK\HackAtum.dproj" Targets="Clean"/>
+        <MSBuild Projects="Client\HackAtum.dproj" Targets="Clean"/>
     </Target>
     <Target Name="HackAtum:Make">
-        <MSBuild Projects="..\..\..\..\Git clone\Implanta\HACK\HackAtum.dproj" Targets="Make"/>
+        <MSBuild Projects="Client\HackAtum.dproj" Targets="Make"/>
     </Target>
     <Target Name="Server">
-        <MSBuild Projects="..\..\..\..\Git clone\Implanta\Server\Server.dproj"/>
+        <MSBuild Projects="Server\Server.dproj"/>
     </Target>
     <Target Name="Server:Clean">
-        <MSBuild Projects="..\..\..\..\Git clone\Implanta\Server\Server.dproj" Targets="Clean"/>
+        <MSBuild Projects="Server\Server.dproj" Targets="Clean"/>
     </Target>
     <Target Name="Server:Make">
-        <MSBuild Projects="..\..\..\..\Git clone\Implanta\Server\Server.dproj" Targets="Make"/>
+        <MSBuild Projects="Server\Server.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="HackAtum;Server"/>
