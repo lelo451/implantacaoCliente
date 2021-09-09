@@ -11,7 +11,8 @@ uses
   ServerMethods in 'ServerMethods.pas' {ServerMethods1: TDataModule},
   ServerContainer in 'ServerContainer.pas' {Server: TDataModule},
   WebModule in 'WebModule.pas' {WebModule1: TWebModule},
-  uDownload in '..\Modal\CLASSES SERVIDOR\uDownload.pas';
+//  uDownload in '..\Modal\CLASSES SERVIDOR\uDownload.pas',
+  SSHCommand in 'SSHCommand.pas';
 
 {$R *.res}
 

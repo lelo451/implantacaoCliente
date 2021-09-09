@@ -56,6 +56,23 @@ object Form1: TForm1
     TabOrder = 3
     OnClick = ButtonOpenBrowserClick
   end
+  object Button1: TButton
+    Left = 288
+    Top = 184
+    Width = 89
+    Height = 25
+    Caption = 'Copy database'
+    TabOrder = 4
+    OnClick = Button1Click
+  end
+  object Edit1: TEdit
+    Left = 152
+    Top = 186
+    Width = 121
+    Height = 21
+    TabOrder = 5
+    TextHint = '23451217000113'
+  end
   object ApplicationEvents1: TApplicationEvents
     OnIdle = ApplicationEvents1Idle
     Left = 288

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.AppEvnts, Vcl.StdCtrls, IdHTTPWebBrokerBridge, Web.HTTPApp;
+  Vcl.AppEvnts, Vcl.StdCtrls, IdHTTPWebBrokerBridge, Web.HTTPApp, SSHCommand;
 
 type
   TForm1 = class(TForm)
@@ -15,11 +15,14 @@ type
     Label1: TLabel;
     ApplicationEvents1: TApplicationEvents;
     ButtonOpenBrowser: TButton;
+    Button1: TButton;
+    Edit1: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
     procedure ButtonStartClick(Sender: TObject);
     procedure ButtonStopClick(Sender: TObject);
     procedure ButtonOpenBrowserClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     FServer: TIdHTTPWebBrokerBridge;
     procedure StartServer;
@@ -43,6 +46,30 @@ begin
   ButtonStart.Enabled := not FServer.Active;
   ButtonStop.Enabled := FServer.Active;
   EditPort.Enabled := not FServer.Active;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  MySSHCommander : TSSHCommand;
+  MyResult : integer;
+begin
+  try
+    MySSHCommander.HostName := 'gate.jelastic.saveincloud.net';
+    MySSHCommander.PortNum := 3022;
+    MySSHCommander.UserName := '77408-9963';
+    MySSHCommander.KeyFile := 'C:\Users\Archer\Desktop\Delphi\keys\devAmbienteteste';
+
+    MyResult := MySSHCommander.SendCommand('cp', '~/newdatabase/VIPSISTEMAS.FDB /opt/firebird/data/' + Edit1.Text + '.FDB');
+    if MyResult > 32 then
+    begin
+      ShowMessage('Comando OK');
+    end
+    else
+      ShowMessage('Error Nr.: ' + MyResult.ToString)
+  except
+    on E: Exception do
+      ShowMessage(E.ClassName + ': ' + E.Message);
+  end;
 end;
 
 procedure TForm1.ButtonOpenBrowserClick(Sender: TObject);

@@ -6,8 +6,8 @@ uses
   uImplemention in 'Model\CLASSES CLIENTE\uImplemention.pas',
   uDM in 'Controller\BANCO\uDM.pas' {DataModule1: TDataModule},
   uValidacaoCNPJ in 'Model\uValidacaoCNPJ.pas',
-  uDownload in 'Model\uDownload.pas',
-  uINI in 'Model\CLASSES CLIENTE\uINI.pas';
+  uINI in 'Model\CLASSES CLIENTE\uINI.pas',
+  uDownload in 'Model\uDownload.pas';
 
 {$R *.res}
 
