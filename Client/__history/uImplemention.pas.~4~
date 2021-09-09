@@ -1,0 +1,42 @@
+unit uImplemention;
+
+interface
+
+uses
+  uDM;
+
+type
+
+TImplementar = class
+
+private
+    fNomeEmpresa: String;
+    fCNPJ: String;
+    fDataImplementacao: String;
+    fSuporte: String;
+  { private declarations }
+protected
+  { protected declarations }
+public
+  { public declarations }
+  procedure EnviarBanco;
+
+published
+  { published declarations }
+  property NomeEmpresa : String read fNomeEmpresa write fNomeEmpresa;
+  property CNPJ : String read fCNPJ write fCNPJ;
+  property DataImplementacao : String read fDataImplementacao write fDataImplementacao;
+  property Suporte : String read fSuporte write fSuporte;
+end;
+
+implementation
+
+{ TImplementar }
+
+procedure TImplementar.EnviarBanco;
+begin
+
+end;
+
+end.
+

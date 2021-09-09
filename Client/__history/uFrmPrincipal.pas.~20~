@@ -1,0 +1,91 @@
+unit uFrmPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uImplemention, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.Menus, uValidacaoCNPJ;
+
+type
+  TForm1 = class(TForm)
+    Pnl_Barra: TPanel;
+    BtFechar: TSpeedButton;
+    Pnl_Cliente: TPanel;
+    EdtNomeCliente: TEdit;
+    EdtCNPJ: TEdit;
+    LblCliente: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    BtnVerificarCNPJ: TSpeedButton;
+    Pnl_VerificarCNPJ: TPanel;
+    Result: TLabel;
+    LblDataBase: TLabel;
+    EdtIP: TEdit;
+    EdtPortaServidor: TEdit;
+    EdtCaminhoBase: TEdit;
+    LblIP: TLabel;
+    LblPortaServidor: TLabel;
+    LblCaminhoBase: TLabel;
+    Pnl_Barrinha: TPanel;
+    LblDataSnap: TLabel;
+    EdtPorta: TEdit;
+    EdtPortaHTTP: TEdit;
+    LblPorta: TLabel;
+    LblPortaHTTP: TLabel;
+    Pnl_Barrinha2: TPanel;
+    EdtIP2: TEdit;
+    EdtPortaServidor2: TEdit;
+    EdtCaminhoBase2: TEdit;
+    LblMormot: TLabel;
+    Label1: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Panel3: TPanel;
+    Label7: TLabel;
+    EdtPortaAplicacao: TEdit;
+    Label8: TLabel;
+    Pnl_TestarPorta: TPanel;
+    BtnTestarPorta: TSpeedButton;
+    Pnl_IniciarImplantacao: TPanel;
+    BtnImplantar: TSpeedButton;
+    Label9: TLabel;
+    Label10: TLabel;
+    Panel1: TPanel;
+    BtnMinimizar: TSpeedButton;
+    procedure BtFecharClick(Sender: TObject);
+    procedure BtnVerificarCNPJClick(Sender: TObject);
+    procedure BtnMinimizarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.BtFecharClick(Sender: TObject);
+begin
+  Close;
+end;
+
+
+procedure TForm1.BtnMinimizarClick(Sender: TObject);
+begin
+  Application.Minimize;
+end;
+
+procedure TForm1.BtnVerificarCNPJClick(Sender: TObject);
+begin
+  // usando as funções isCNPJ e imprimeCNPJ da unit "ValidaCNPJ"
+  if isCNPJ(EdtCNPJ.Text)then Result.Caption := imprimeCNPJ(EdtCNPJ.Text)
+    else Result.Caption := 'Erro: CNPJ inválido !!!';
+end;
+
+end.

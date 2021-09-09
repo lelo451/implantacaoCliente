@@ -1,0 +1,126 @@
+unit uINI;
+
+interface
+
+uses
+  System.SysUtils, IniFiles;
+
+type
+  INI = class
+  private
+
+
+  protected
+  public
+    class procedure EscreverINI(path, sessao, campo, value: string);
+    class function  LerINI(path, sessao, campo: string; aDefault: string = ''): string;
+
+  published
+
+  end;
+
+implementation
+
+{ ClienteServidorINI }
+class procedure INI.EscreverINI(path, sessao, campo, value: string);
+var
+  arqINI: TIniFile;
+begin
+  arqINI := TIniFile.Create(path);
+  try
+    arqINI.WriteString(sessao, campo, value);
+  finally
+    arqINI.Free;
+  end;
+end;
+
+class function INI.LerINI(path, sessao, campo: string; aDefault: string = ''): string;
+var
+  arqINI: TIniFile;
+begin
+  // Verificando o arquivo de conexão do banco
+  if FileExists(path) then
+  begin
+    arqINI := TIniFile.Create(path);
+    try
+      Result := arqINI.ReadString(sessao, campo, aDefault);
+    finally
+      FreeAndNil(arqINI);
+    end;
+  end;
+end;
+
+end.
+
+(*
+
+[FBCONNECTION]
+Database=10.100.35.31/3050:opt/firebird/data/02645739000186.FDB
+Password=tew93uj8
+ServerCharSet=WIN1252
+sqldialect=3
+HostName=localhost
+WaitOnLocks=False
+User_Name=ftoliveira
+
+[DATASNAP]
+Port=2003
+PortHttp=3003
+
+[DBX]
+TipoBancoDados=FBCONNECTION
+
+[MORMOT]
+PORTA=4030
+Database=10.100.35.31/3050:opt/firebird/data/02645739000186_LOG.FDB
+
+
+
+private
+      FDatabase       : String;
+      FPassword       : String;
+      FServerCharSet  : String;
+      FSqldialect     : String;
+      FHost_Name      : String;
+      FWaitOnLocks    : String;
+      FUser_Name      : String;
+      FPort           : String;
+      FPortHttp       : String;
+      FTipoBancoDados : String;
+      FPorta          : String;
+      FDatabaseMM     : String;
+      INI             : TIniFile;
+    protected
+    public
+      function ModificarBanco : Boolean;
+    published
+      property Database       : String read FDatabase       write FDatabase;
+      property Password       : String read FPassword       write FPassword;
+      property ServerCharSet  : String read FServerCharSet  write FServerCharSet;
+      property Sqldialect     : String read FSqldialect     write FSqldialect;
+      property Host_Name      : String read FHost_Name      write FHost_Name;
+      property WaitOnLocks    : String read FWaitOnLocks    write FWaitOnLocks;
+      property User_Name      : String read FUser_Name      write FUser_Name;
+      property Port           : String read FPort           write FPort;
+      property PortHttp       : String read FPortHttp       write FPortHttp;
+      property TipoBancoDados : String read FTipoBancoDados write FTipoBancoDados;
+      property Porta          : String read FPorta          write FPorta;
+      property DatabaseMM     : String read FDatabaseMM     write FDatabaseMM;
+
+function ClienteServidorINI.ModificarBanco: Boolean;
+begin
+  INI.Create(ExtractFilePath(ParamStr(0)) + 'Database.ini');
+  FDatabase       := INI.ReadString('FBCONNECTION','','');
+  FPassword       := INI.ReadString('FBCONNECTION','','');
+  FServerCharSet  := INI.ReadString('FBCONNECTION','','');
+  FSqldialect     := INI.ReadString('FBCONNECTION','','');
+  FHost_Name      := INI.ReadString('FBCONNECTION','','');
+  FWaitOnLocks    := INI.ReadString('FBCONNECTION','','');
+  FUser_Name      := INI.ReadString('','','');
+  FPort           := INI.ReadString('','','');
+  FPortHttp       := INI.ReadString('','','');
+  FTipoBancoDados := INI.ReadString('','','');
+  FPorta          := INI.ReadString('','','');
+  FDatabaseMM     := INI.ReadString('','','');
+end;
+ *)
