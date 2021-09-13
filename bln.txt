@@ -1,0 +1,39 @@
+uValidarCNPJ, uPortaDB,uImplemention,
+
+
+
+
+  TImplementar.GetCNPJAceito.AdcionarInformacao(EdtIP.Text, EdtPortaServidor.Text, EdtCaminhoBase.Text,
+  EdtPortaAplicacao.Text, EdtPorta.Text, EdtPortaHTTP.Text, EdtIP2.Text, EdtPortaServidor2.Text, EdtCaminhoBase2.Text);
+
+    with Dm2 do
+    begin
+      TabelaImplantacao.Open;
+      TabelaImplantacao.Insert;
+      TabelaImplantacaoCNPJ.value := EdtCNPJ.Text;
+      TabelaImplantacao.Post;
+      TabelaImplantacao.Close;
+    end;
+
+end;
+
+  //prcValidarCNPJ ( Form1 );
+
+  if (EdtCNPJ.Text) <> '' then  //VALIDA SE O USUARIO TEM CONTA CADASTRADA NO BANCO
+  begin
+    with Dm2 do
+    begin
+      QueryImplantacao.SQL.Clear;
+      QueryImplantacao.SQL.Add('SELECT CNPJ FROM CNPJ');
+      QueryImplantacao.SQL.Add('WHERE CNPJ = '+QuotedStr(Trim(EdtCNPJ.Text)) );
+      QueryImplantacao.Open;
+    end;
+
+    if not Dm2.QueryImplantacao.IsEmpty then
+    begin
+      ShowMessage('Já tem parsa');
+    end;
+  end;
+
+
+TImplementar.GetCNPJAceito.AdcionarCliente(EdtNomeCliente.Text, EdtCNPJ.Text);

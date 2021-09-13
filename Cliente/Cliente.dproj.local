@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/09/09 13:07:50.000.000,=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/09/09 13:08:22.000.799,=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\ClientClassesUnit1.pas</Transaction>
+    <Transaction>2021/09/09 13:08:23.000.091,=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\ClientModuleUnit1.pas</Transaction>
+    <Transaction>2021/09/09 13:11:10.000.399,C:\Users\dev03.VIPSISTEMAS\Desktop\teste\Cliente\uModule.dfm=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\ClientModuleUnit1.dfm</Transaction>
+    <Transaction>2021/09/09 13:11:10.000.399,C:\Users\dev03.VIPSISTEMAS\Desktop\teste\Cliente\uModule.pas=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\ClientModuleUnit1.pas</Transaction>
+    <Transaction>2021/09/09 13:11:23.000.283,C:\Users\dev03.VIPSISTEMAS\Desktop\teste\Cliente\uClientClasses.pas=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\ClientClassesUnit1.pas</Transaction>
+    <Transaction>2021/09/09 13:11:37.000.049,C:\Users\dev03.VIPSISTEMAS\Desktop\teste\Cliente\uTela_cliente.pas=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/09/09 13:11:37.000.049,C:\Users\dev03.VIPSISTEMAS\Desktop\teste\Cliente\uTela_cliente.dfm=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2021/09/09 13:11:42.000.687,C:\Users\dev03.VIPSISTEMAS\Desktop\teste\Cliente\Cliente.dproj=C:\Users\dev03.VIPSISTEMAS\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/09/09 14:43:12.000.769,C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uTela_cliente.pas=</Transaction>
+    <Transaction>2021/09/09 14:43:18.000.286,=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uFrmPrincipal.pas</Transaction>
+    <Transaction>2021/09/09 14:51:23.000.224,=C:\Users\dev03.VIPSISTEMAS\Desktop\implantacaoCliente-master\HACK\HACK\Model\uObrigatorio.pas</Transaction>
+    <Transaction>2021/09/09 14:51:42.000.905,C:\Users\dev03.VIPSISTEMAS\Desktop\implantacaoCliente-master\HACK\HACK\Model\uObrigatorio.pas=</Transaction>
+    <Transaction>2021/09/09 14:52:29.000.288,=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uObrigatorio.pas</Transaction>
+    <Transaction>2021/09/09 14:56:42.000.460,=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uImplemention.pas</Transaction>
+    <Transaction>2021/09/09 15:00:22.000.683,=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uValidacaoCNPJ.pas</Transaction>
+    <Transaction>2021/09/09 15:08:43.000.890,C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uImplemention.pas=</Transaction>
+    <Transaction>2021/09/09 15:44:06.000.818,=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\Unit1.pas</Transaction>
+    <Transaction>2021/09/10 09:21:56.000.242,=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\Unit1.pas</Transaction>
+    <Transaction>2021/09/10 09:57:17.000.586,C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\Unit1.pas=C:\Users\dev03.VIPSISTEMAS\Desktop\HackAtum\Cliente\uProxyClient.pas</Transaction>
+    <Transaction>2021/09/13 10:06:33.000.720,=C:\Users\dev01.VIPSISTEMAS\Desktop\HackAtum\Cliente\Unit1.pas</Transaction>
+    <Transaction>2021/09/13 10:08:55.000.789,C:\Users\dev01.VIPSISTEMAS\Desktop\HackAtum\Cliente\Unit1.pas=C:\Users\dev01.VIPSISTEMAS\Desktop\HackAtum\Cliente\uField.pas</Transaction>
+    <Transaction>2021/09/13 11:39:10.000.428,=C:\Users\dev01.VIPSISTEMAS\Desktop\HackAtum\Cliente\ClientClassesUnit1.pas</Transaction>
+    <Transaction>2021/09/13 11:39:10.000.652,=C:\Users\dev01.VIPSISTEMAS\Desktop\HackAtum\Cliente\ClientModuleUnit2.pas</Transaction>
+  </Transactions>
+</BorlandProject>

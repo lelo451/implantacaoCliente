@@ -1,0 +1,144 @@
+//
+// Created by the DataSnap proxy generator.
+// 10/09/2021 10:12:32
+//
+
+unit uProxyClient;
+
+interface
+
+uses System.JSON, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.DBXJSONReflect;
+
+type
+  TServerMethods1Client = class(TDSAdminClient)
+  private
+    FVerificarCNPJnaBaseCommand: TDBXCommand;
+    FVerificarPortadoDataBaseCommand: TDBXCommand;
+    FVerificarPortaAPPCommand: TDBXCommand;
+    FVerificarPortadoDataSnapCommand: TDBXCommand;
+    FVerificarPortaHTTPCommand: TDBXCommand;
+    FVerificarPortaMormotCommand: TDBXCommand;
+  public
+    constructor Create(ADBXConnection: TDBXConnection); overload;
+    constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function VerificarCNPJnaBase(cnpj: string): Boolean;
+    function VerificarPortadoDataBase(PortaDB: string): Boolean;
+    function VerificarPortaAPP(PortaAPP: string): Boolean;
+    function VerificarPortadoDataSnap(PortaDS: string): Boolean;
+    function VerificarPortaHTTP(PortaHTTP: string): Boolean;
+    function VerificarPortaMormot(PortaMormot: string): Boolean;
+  end;
+
+implementation
+
+function TServerMethods1Client.VerificarCNPJnaBase(cnpj: string): Boolean;
+begin
+  if FVerificarCNPJnaBaseCommand = nil then
+  begin
+    FVerificarCNPJnaBaseCommand := FDBXConnection.CreateCommand;
+    FVerificarCNPJnaBaseCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarCNPJnaBaseCommand.Text := 'TServerMethods1.VerificarCNPJnaBase';
+    FVerificarCNPJnaBaseCommand.Prepare;
+  end;
+  FVerificarCNPJnaBaseCommand.Parameters[0].Value.SetWideString(cnpj);
+  FVerificarCNPJnaBaseCommand.ExecuteUpdate;
+  Result := FVerificarCNPJnaBaseCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TServerMethods1Client.VerificarPortadoDataBase(PortaDB: string): Boolean;
+begin
+  if FVerificarPortadoDataBaseCommand = nil then
+  begin
+    FVerificarPortadoDataBaseCommand := FDBXConnection.CreateCommand;
+    FVerificarPortadoDataBaseCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarPortadoDataBaseCommand.Text := 'TServerMethods1.VerificarPortadoDataBase';
+    FVerificarPortadoDataBaseCommand.Prepare;
+  end;
+  FVerificarPortadoDataBaseCommand.Parameters[0].Value.SetWideString(PortaDB);
+  FVerificarPortadoDataBaseCommand.ExecuteUpdate;
+  Result := FVerificarPortadoDataBaseCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TServerMethods1Client.VerificarPortaAPP(PortaAPP: string): Boolean;
+begin
+  if FVerificarPortaAPPCommand = nil then
+  begin
+    FVerificarPortaAPPCommand := FDBXConnection.CreateCommand;
+    FVerificarPortaAPPCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarPortaAPPCommand.Text := 'TServerMethods1.VerificarPortaAPP';
+    FVerificarPortaAPPCommand.Prepare;
+  end;
+  FVerificarPortaAPPCommand.Parameters[0].Value.SetWideString(PortaAPP);
+  FVerificarPortaAPPCommand.ExecuteUpdate;
+  Result := FVerificarPortaAPPCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TServerMethods1Client.VerificarPortadoDataSnap(PortaDS: string): Boolean;
+begin
+  if FVerificarPortadoDataSnapCommand = nil then
+  begin
+    FVerificarPortadoDataSnapCommand := FDBXConnection.CreateCommand;
+    FVerificarPortadoDataSnapCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarPortadoDataSnapCommand.Text := 'TServerMethods1.VerificarPortadoDataSnap';
+    FVerificarPortadoDataSnapCommand.Prepare;
+  end;
+  FVerificarPortadoDataSnapCommand.Parameters[0].Value.SetWideString(PortaDS);
+  FVerificarPortadoDataSnapCommand.ExecuteUpdate;
+  Result := FVerificarPortadoDataSnapCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TServerMethods1Client.VerificarPortaHTTP(PortaHTTP: string): Boolean;
+begin
+  if FVerificarPortaHTTPCommand = nil then
+  begin
+    FVerificarPortaHTTPCommand := FDBXConnection.CreateCommand;
+    FVerificarPortaHTTPCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarPortaHTTPCommand.Text := 'TServerMethods1.VerificarPortaHTTP';
+    FVerificarPortaHTTPCommand.Prepare;
+  end;
+  FVerificarPortaHTTPCommand.Parameters[0].Value.SetWideString(PortaHTTP);
+  FVerificarPortaHTTPCommand.ExecuteUpdate;
+  Result := FVerificarPortaHTTPCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TServerMethods1Client.VerificarPortaMormot(PortaMormot: string): Boolean;
+begin
+  if FVerificarPortaMormotCommand = nil then
+  begin
+    FVerificarPortaMormotCommand := FDBXConnection.CreateCommand;
+    FVerificarPortaMormotCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarPortaMormotCommand.Text := 'TServerMethods1.VerificarPortaMormot';
+    FVerificarPortaMormotCommand.Prepare;
+  end;
+  FVerificarPortaMormotCommand.Parameters[0].Value.SetWideString(PortaMormot);
+  FVerificarPortaMormotCommand.ExecuteUpdate;
+  Result := FVerificarPortaMormotCommand.Parameters[1].Value.GetBoolean;
+end;
+
+
+constructor TServerMethods1Client.Create(ADBXConnection: TDBXConnection);
+begin
+  inherited Create(ADBXConnection);
+end;
+
+
+constructor TServerMethods1Client.Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ADBXConnection, AInstanceOwner);
+end;
+
+
+destructor TServerMethods1Client.Destroy;
+begin
+  FVerificarCNPJnaBaseCommand.DisposeOf;
+  FVerificarPortadoDataBaseCommand.DisposeOf;
+  FVerificarPortaAPPCommand.DisposeOf;
+  FVerificarPortadoDataSnapCommand.DisposeOf;
+  FVerificarPortaHTTPCommand.DisposeOf;
+  FVerificarPortaMormotCommand.DisposeOf;
+  inherited;
+end;
+
+end.
+

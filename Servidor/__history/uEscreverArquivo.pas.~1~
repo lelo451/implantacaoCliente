@@ -1,0 +1,157 @@
+unit uEscreverArquivo;
+
+interface
+
+uses
+  uDM,uINI,System.SysUtils, Vcl.Forms, Vcl.Dialogs;
+
+type
+//Serve para escrever arquivo DataBase.ini e iniciar.bat
+RInformacaoIni = Record
+  IP              : String;
+  PortaServidor   : String;
+  Caminho         : String;
+  PortaAplicacao  : String;
+  PortaSnap       : String;
+  PortaHTTP       : String;
+end;
+
+TEscreverArquivo = class
+
+private
+  CNPJ : String;
+  function LastPos(Substr, S: string): Integer;
+
+strict private
+  class var Implematation  : TEscreverArquivo ;
+
+public
+  function EscreverIni(Value : RInformacaoIni): Boolean;
+  function EscreverBat(aNome, aCNPJ : String) : Boolean;
+  class function GetCNPJAceito : TEscreverArquivo;
+end;
+
+implementation
+
+//Cria a unit
+class function TEscreverArquivo.GetCNPJAceito: TEscreverArquivo;
+begin
+  if not Assigned(Implematation) then
+    Implematation := TEscreverArquivo.Create;
+  Result := Implematation;
+end;
+
+//Salva no arquivo INI caminho pra DataBase
+function TEscreverArquivo.EscreverIni(Value : RInformacaoIni): Boolean;
+var
+  DataBase : String;
+  Mormot   : String;
+
+begin
+  DataBase       := Value.Ip + '/' + Value.PortaServidor + ':' + Value.Caminho + '/' + CNPJ + '.FDB';
+  Mormot         := Value.Ip + '/' + Value.PortaServidor + ':' + Value.Caminho + '/' + CNPJ + '_LOG.FDB';
+
+  try
+    TINI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','FBCONNECTION','Database',DataBase);
+    TINI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,'Port'    ,Value.PortaSnap);
+    TINI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','DATASNAP'    ,'PortHttp',Value.PortaHTTP);
+    TINI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,'PORTA'   ,Value.PortaAplicacao);
+    TINI.EscreverINI(ExtractFilePath(Application.ExeName)+'Teste.ini','MORMOT'      ,'Database',Mormot);
+    result := true;
+  except
+    result := false;
+  end;
+
+end;
+
+//Salva no arquivo Bat para executar no iniciar
+function TEscreverArquivo.EscreverBat(aNome, aCNPJ: String): Boolean;
+var
+  Arq: TextFile;
+  Bat, Caminho, Texto : String;
+  Contem : Boolean;
+begin
+  CNPJ   := aCNPJ;
+  Bat    := ExtractFileName('iniciar.bat');//nome do arquivo
+  Result := False;
+  Contem := False;
+  //Local do arquivo
+  Caminho := 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\iniciar.bat';//usar esse
+  //Caminho := 'C:\Users\Tomás\Documents\Embarcadero\Studio\Projects\HACK\iniciar.bat';//usar para teste
+  AssignFile(Arq, Caminho);
+
+  //Verifica se exite o arquivo
+  try
+    if FileExists(Caminho) then//verifica se exite
+    begin
+      Reset(Arq);//Coloca para leitura
+      while not Eof(Arq) do//varre o arquivo
+      begin
+        Readln(Arq,Texto);//Verifica se contem
+        if LastPos('::'+CNPJ,Texto) <> 0 then//veifica se existe cliente
+        begin
+          Contem := True;
+        end;
+      end;
+      Append(Arq); //abre para edição
+      if Contem then //Se verdadeiro existe o comando para esse CNPJ
+        ShowMessage('Já existe!')
+      else
+      begin
+        Writeln(Arq, '::' + CNPJ + ' ' + aNome);
+        Writeln(Arq, 'cd "C:\serverSigeps\' + aNome + '"');
+        Writeln(Arq, 'start prServerSIGEPS2_' + aNome);
+      end;
+
+
+    end
+    else
+    begin
+      ReWrite(Arq); //Cria novo arquivo bat
+      WriteLn(Arq, '@echo off');
+      Writeln(Arq, '');
+      WriteLn(Arq, 'taskkill /F /IM prServerSIGEPS2*');
+      WriteLn(Arq, 'taskkill /F /IM Resident.exe');
+      Writeln(Arq, 'taskkill /F /IM Resident.exe');
+      Writeln(Arq, '');
+      Writeln(Arq, 'E:');
+      Writeln(Arq, '');
+      ShowMessage('Novo arquivo criado!!!!!');
+    end;
+    result := true
+  finally
+    CloseFile(Arq); //fecha
+  end;
+end;
+
+//Pegar a posição inicial de uma palavra numa String
+function TEscreverArquivo.LastPos(Substr, S: string): Integer;
+var
+  I: Integer;
+begin
+  Result := 0;
+  if Length(Substr) = Length(S) then
+  begin
+    if Substr = S then
+    begin
+      Result := 1;
+    end
+    else
+    begin
+      Result := 0;
+    end;
+  end
+  else if Length(Substr) < Length(S) then
+  begin
+    I := Length(S) - Length(Substr);
+    repeat
+      if copy(S, I, Length(Substr)) = Substr then
+      begin
+        Result := I;
+      end;
+      Dec(I);
+    until (I = 0) or (Result <> 0);
+  end;
+end;
+end.
+

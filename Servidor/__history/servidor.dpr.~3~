@@ -1,0 +1,24 @@
+program servidor;
+
+uses
+  Vcl.Forms,
+  Web.WebReq,
+  IdHTTPWebBrokerBridge,
+  uMethods in 'uMethods.pas' {ServerMethods1: TDSServerModule},
+  uContainer in 'uContainer.pas' {ServerContainer1: TDataModule},
+  uTela_servidor in 'uTela_servidor.pas' {Form1},
+  uImplemention in 'uImplemention.pas',
+  uINI in 'uINI.pas',
+  uValidarCNPJ in 'uValidarCNPJ.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TServerContainer1, ServerContainer1);
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TServerMethods1, ServerMethods1);
+  Application.Run;
+end.
+

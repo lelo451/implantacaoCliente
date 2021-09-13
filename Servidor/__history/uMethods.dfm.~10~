@@ -1,0 +1,35 @@
+object ServerMethods1: TServerMethods1
+  OldCreateOrder = False
+  Height = 238
+  Width = 333
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'User_Name=sysdba'
+      'Password=masterkey'
+      
+        'Database=C:\Users\dev03.VIPSISTEMAS\Downloads\IMPLANTACAO (1).FD' +
+        'B'
+      'DriverID=FB')
+    Connected = True
+    LoginPrompt = False
+    Left = 48
+    Top = 8
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = QueryImplantacao
+    Left = 240
+    Top = 8
+  end
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    VendorLib = 'C:\Program Files\Firebird\Firebird_2_5\WOW64\fbclient.dll'
+    Left = 128
+    Top = 8
+  end
+  object QueryImplantacao: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT * FROM IMPLANTACAO')
+    Left = 48
+    Top = 80
+  end
+end

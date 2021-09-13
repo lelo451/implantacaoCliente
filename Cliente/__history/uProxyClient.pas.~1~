@@ -1,0 +1,59 @@
+//
+// Created by the DataSnap proxy generator.
+// 10/09/2021 09:56:45
+//
+
+unit uProxyClient;
+
+interface
+
+uses System.JSON, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.DBXJSONReflect;
+
+type
+  TServerMethods1Client = class(TDSAdminClient)
+  private
+    FVerificarCNPJnaBaseCommand: TDBXCommand;
+  public
+    constructor Create(ADBXConnection: TDBXConnection); overload;
+    constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function VerificarCNPJnaBase(cnpj: string): Boolean;
+  end;
+
+implementation
+
+function TServerMethods1Client.VerificarCNPJnaBase(cnpj: string): Boolean;
+begin
+  if FVerificarCNPJnaBaseCommand = nil then
+  begin
+    FVerificarCNPJnaBaseCommand := FDBXConnection.CreateCommand;
+    FVerificarCNPJnaBaseCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FVerificarCNPJnaBaseCommand.Text := 'TServerMethods1.VerificarCNPJnaBase';
+    FVerificarCNPJnaBaseCommand.Prepare;
+  end;
+  FVerificarCNPJnaBaseCommand.Parameters[0].Value.SetWideString(cnpj);
+  FVerificarCNPJnaBaseCommand.ExecuteUpdate;
+  Result := FVerificarCNPJnaBaseCommand.Parameters[1].Value.GetBoolean;
+end;
+
+
+constructor TServerMethods1Client.Create(ADBXConnection: TDBXConnection);
+begin
+  inherited Create(ADBXConnection);
+end;
+
+
+constructor TServerMethods1Client.Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ADBXConnection, AInstanceOwner);
+end;
+
+
+destructor TServerMethods1Client.Destroy;
+begin
+  FVerificarCNPJnaBaseCommand.DisposeOf;
+  inherited;
+end;
+
+end.
+

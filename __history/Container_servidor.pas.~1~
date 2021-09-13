@@ -1,0 +1,40 @@
+unit Container_servidor;
+
+interface
+
+uses System.SysUtils, System.Classes,
+  Datasnap.DSTCPServerTransport,
+  Datasnap.DSServer, Datasnap.DSCommonServer,
+  IPPeerServer, IPPeerAPI, Datasnap.DSAuth;
+
+type
+  Servercontainer = class(TDataModule)
+    Server_servidor: TDSServer;
+    Transport_servidor: TDSTCPServerTransport;
+    Class_servidor: TDSServerClass;
+    procedure Class_servidorGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+  private
+    { Private declarations }
+  public
+  end;
+
+var
+  ServerContainer1: Servercontainer;
+
+implementation
+
+
+{$R *.dfm}
+
+uses
+  Methods_servidor;
+
+procedure Servercontainer.Class_servidorGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := Methods_servidor.TServerMethods1;
+end;
+
+end.
+

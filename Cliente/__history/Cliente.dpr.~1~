@@ -1,0 +1,17 @@
+program Cliente;
+
+uses
+  Vcl.Forms,
+  uTela_cliente in 'uTela_cliente.pas' {Form1},
+  uClientClasses in 'uClientClasses.pas',
+  uModule in 'uModule.pas' {ClientModule1: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TClientModule1, ClientModule1);
+  Application.Run;
+end.

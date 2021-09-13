@@ -1,0 +1,59 @@
+unit uField;
+
+interface
+
+Uses System.Classes,REST.Json;
+
+type
+
+TField = class(Tpersistent)
+private
+  FCampoNome        : String;
+  FCampoCNPJ        : Integer;
+  FCampoPortaDS     : Integer;
+  FCampoPortaHTTP   : Integer;
+  FCampoPortaMormot : Integer;
+
+protected
+  { protected declarations }
+public
+  { public declarations }
+
+published
+  property CampoNome:string read FCampoNome write FCampoNome;
+  property CampoCNPJ:Integer read FCampoCNPJ write FCampoCNPJ;
+  property CampoPortaDS:Integer read FCampoPortaDS write FCampoPortaDS;
+  property CampoPortaHTTP:Integer read FCampoPortaHTTP write FCampoPortaHTTP;
+  property CampoPortaMormot:Integer read FCampoPortaMormot write FCampoPortaMormot;
+  end;
+
+  TFactoryJSON<T> = class
+  public
+    class function JsonToObject(AJson: String): T;virtual;abstract;
+    class function ObjectToJSON(AObject: T): String;virtual;abstract;
+  end;
+
+  FactoryJSON = class(TFactoryJSON<TField>)
+  public
+    class function JsonToObject(AJson: String): TField;override;
+    class function ObjectToJSON(AObject: TField): String;override;
+  end;
+
+implementation
+
+class function FactoryJSON.JsonToObject(AJson: String): TField;
+begin
+  if (AJson <> '')
+      and (AJson <> '{}') then
+    Result := TJson.JsonToObject<TField>(AJSON)
+  else Result := nil;
+end;
+
+class function FactoryJSON.ObjectToJSON(AObject: TField): String;
+begin
+  if Assigned(AObject) then
+    Result := TJson.ObjectToJsonString(AObject)
+  else Result := '{}';
+end;
+
+end.

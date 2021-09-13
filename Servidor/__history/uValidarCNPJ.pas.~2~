@@ -1,0 +1,52 @@
+unit uValidarCNPJ;
+
+interface
+
+uses
+SysUtils, Vcl.Controls, Vcl.Forms,  Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask,
+   uImplemention, uINI;
+
+
+
+procedure prcValidarCNPJ ( Form: TForm );
+
+type
+
+TValidacaoCNPJ = class
+
+
+private
+{ private declarations }
+
+ public
+
+ var CNPJ : string;
+
+{ public declarations }
+
+end;
+
+{ TValidacao }
+
+
+implementation
+
+uses
+uMethods;
+
+{ TValidacao }
+
+procedure prcValidarCNPJ ( Form : TForm );
+var
+CNPJ : String;
+begin
+  with TServerMethods1 do
+    begin
+      QueryImplantacao.open;
+      QueryImplantacao.SQL.clear;
+      QueryImplantacao.SQL.Add ('Select from CNPJ where Implantacao =' + CNPJ);
+      QueryImplantacao.close;
+    end;
+end;
+
+end.
